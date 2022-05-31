@@ -4,17 +4,17 @@ import { DashboardNavBar } from "./components/DashboardNavBar";
 import { Col, Container, Row } from "react-bootstrap";
 import { DashboardChart } from "./components/DashboardChart";
 
-const ENDPOINT = "http://localhost:8000";
-const socket = socketIOClient(ENDPOINT);
+// const ENDPOINT = "http://localhost:8000";
+// const socket = socketIOClient(ENDPOINT);
 
 function App() {
-  const [data, setData] = useState<number[]>([]);
-
-  useEffect(() => {
-    socket.on("FromAPI", (recData) => {
-      setData((data) => [...data, typeof recData !== "undefined" && recData]);
-    });
-  }, []);
+  // const [data, setData] = useState<number[]>([]);
+  //
+  // useEffect(() => {
+  //   socket.on("FromAPI", (recData) => {
+  //     setData((data) => [...data, typeof recData !== "undefined" && recData]);
+  //   });
+  // }, []);
 
   return (
     <div>
@@ -24,27 +24,27 @@ function App() {
           <Col>
             <DashboardChart
               name="First Chart"
-              data={[1, 2, 3]}
+              socket="FromAPI"
             ></DashboardChart>
           </Col>
           <Col>
             <DashboardChart
-              name="Second Chart"
-              data={[1, 2, 3]}
+              name="First Chart"
+              socket="FromAPI"
             ></DashboardChart>
           </Col>
         </Row>
         <Row>
           <Col>
             <DashboardChart
-              name="Third Chart"
-              data={[1, 2, 3]}
+              name="First Chart"
+              socket="FromAPI"
             ></DashboardChart>
           </Col>
           <Col>
             <DashboardChart
-              name="Forth Chart"
-              data={[1, 2, 3]}
+              name="First Chart"
+              socket="FromAPI"
             ></DashboardChart>
           </Col>
         </Row>
