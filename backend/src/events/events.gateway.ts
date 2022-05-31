@@ -5,6 +5,7 @@ import {
   OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
+  WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
 import { Logger } from '@nestjs/common';
@@ -16,34 +17,36 @@ export class EventsGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
   private logger: Logger = new Logger('EventsGateway');
-  getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  afterInit(server: Server) {
-    this.logger.log('Message Gateway is initialized.');
+  @WebSocketServer()
+  server: Server;
+  getRandomArbitrary(minValue, maxValue) {
+    return Math.random() * (maxValue - minValue) + minValue;
   }
   handleConnection(client: Socket, ...args: any[]): any {
-    client.emit('FromAPI');
-    let interval;
-    if (interval) {
-      clearInterval(interval);
-    }
-
-    interval = setInterval(() => this.getApiAndEmit(client), 1000);
     this.logger.log(`Client connected: ${client.id}`);
   }
-  getApiAndEmit = (socket) => {
-    const response = this.getRandomArbitrary(1, 100);
-    // Emitting a new message. Will be consumed by the client
-    socket.emit('FromAPI', response);
-  };
+
   handleDisconnect(client: Socket): any {
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
-  @SubscribeMessage('FromAfPI')
-  handleEvent(@ConnectedSocket() client: Socket) {
-    this.logger.log(`Emitting message to ${client}..`);
-    client.emit('FromAfPI', new Date());
+  afterInit(server: Server) {
+    this.logger.log('Initialize Gateway');
+    this.emitMessages('umbrella_stocks', 1500, 1, 55);
+    this.emitMessages('gotham_city_opera_stocks', 2000);
+    this.emitMessages('ingen_stocks', 1000, 70, 99);
+    this.emitMessages('cyberdyne_systems', 1250, 30);
+  }
+
+  private emitMessages(
+    ev: string,
+    interval: number = 1000,
+    minValue = 1,
+    maxValue = 100,
+  ) {
+    setInterval(
+      () => this.server.emit(ev, this.getRandomArbitrary(minValue, maxValue)),
+      interval,
+    );
   }
 }

@@ -23,28 +23,28 @@ function App() {
         <Row>
           <Col>
             <DashboardChart
-              name="First Chart"
-              socket="FromAPI"
+              name="Umbrella Corporation Stocks"
+              socket="umbrella_stocks"
             ></DashboardChart>
           </Col>
           <Col>
             <DashboardChart
-              name="First Chart"
-              socket="FromAPI"
+              name="Gotham City Opera Stocks"
+              socket="gotham_city_opera_stocks"
             ></DashboardChart>
           </Col>
         </Row>
         <Row>
           <Col>
             <DashboardChart
-              name="First Chart"
-              socket="FromAPI"
+              name="InGen Stocks"
+              socket="ingen_stocks"
             ></DashboardChart>
           </Col>
           <Col>
             <DashboardChart
-              name="First Chart"
-              socket="FromAPI"
+              name="Cyberdyne Systems Stocks"
+              socket="cyberdyne_systems"
             ></DashboardChart>
           </Col>
         </Row>
