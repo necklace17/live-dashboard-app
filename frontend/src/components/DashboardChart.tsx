@@ -1,7 +1,13 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import React from "react";
 
-export function DashboardChart(props) {
+type Props = {
+  name: string;
+  data: number[];
+};
+
+export function DashboardChart(props: Props) {
   return (
     <HighchartsReact
       highcharts={Highcharts}

@@ -8,7 +8,7 @@ const ENDPOINT = "http://localhost:8000";
 const socket = socketIOClient(ENDPOINT);
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<number[]>([]);
 
   useEffect(() => {
     socket.on("FromAPI", (recData) => {
