@@ -22,18 +22,30 @@ function App() {
       <Container fluid="md">
         <Row>
           <Col>
-            <DashboardChart></DashboardChart>
+            <DashboardChart
+              name="First Chart"
+              data={[1, 2, 3]}
+            ></DashboardChart>
           </Col>
           <Col>
-            <DashboardChart></DashboardChart>
+            <DashboardChart
+              name="Second Chart"
+              data={[1, 2, 3]}
+            ></DashboardChart>
           </Col>
         </Row>
         <Row>
           <Col>
-            <DashboardChart></DashboardChart>
+            <DashboardChart
+              name="Third Chart"
+              data={[1, 2, 3]}
+            ></DashboardChart>
           </Col>
           <Col>
-            <DashboardChart></DashboardChart>
+            <DashboardChart
+              name="Forth Chart"
+              data={[1, 2, 3]}
+            ></DashboardChart>
           </Col>
         </Row>
       </Container>

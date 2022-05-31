@@ -1,14 +1,21 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
-export function DashboardChart() {
+export function DashboardChart(props) {
   return (
     <HighchartsReact
       highcharts={Highcharts}
       options={{
         title: {
-          text: "My chart",
+          text: props.name,
         },
+        xAxis: { title: { text: "xAxis Title" } },
+        yAxis: { title: { text: "yAxis Title" } },
+        series: [
+          {
+            data: props.data,
+          },
+        ],
         plotOptions: {
           series: {
             marker: {
@@ -16,11 +23,6 @@ export function DashboardChart() {
             },
           },
         },
-        series: [
-          {
-            data: [1, 2, 3],
-          },
-        ],
       }}
     />
   );
