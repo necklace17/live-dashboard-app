@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
+import { DashboardNavBar } from "./components/DashboardNavBar";
+import { Col, Container, Row } from "react-bootstrap";
+import { DashboardChart } from "./components/DashboardChart";
+
 const ENDPOINT = "http://localhost:8000";
 const socket = socketIOClient(ENDPOINT);
 
@@ -16,26 +18,25 @@ function App() {
 
   return (
     <div>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={{
-          title: {
-            text: "My chart",
-          },
-          plotOptions: {
-            series: {
-              marker: {
-                enabled: false,
-              },
-            },
-          },
-          series: [
-            {
-              data: data,
-            },
-          ],
-        }}
-      />
+      <DashboardNavBar></DashboardNavBar>
+      <Container fluid="md">
+        <Row>
+          <Col>
+            <DashboardChart></DashboardChart>
+          </Col>
+          <Col>
+            <DashboardChart></DashboardChart>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <DashboardChart></DashboardChart>
+          </Col>
+          <Col>
+            <DashboardChart></DashboardChart>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
