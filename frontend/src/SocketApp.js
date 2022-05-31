@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     socket.on("FromAPI", (recData) => {
-      setData((data) => [...data, recData > 0 ? recData : false]);
+      setData((data) => [...data, typeof recData !== "undefined" && recData]);
     });
   }, []);
 
