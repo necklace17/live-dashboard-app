@@ -15,13 +15,24 @@ export function DashboardChart(props: Props) {
 
   useEffect(() => {
     socket.on(props.socket, (recData) => {
-      setData((data) => [...data, typeof recData !== "undefined" && recData]);
+      setData(function (data) {
+        if (data.length >= 1000) {
+          data.shift();
+        }
+        return [...data, typeof recData !== "undefined" && recData];
+      });
     });
   }, []);
   return (
     <HighchartsReact
       highcharts={Highcharts}
       options={{
+        // chart: {
+        //   zoomType: "x",
+        //   borderColor: "#EBBA95",
+        //   borderRadius: 20,
+        //   borderWidth: 2,
+        // },
         title: {
           text: props.name,
         },
@@ -32,8 +43,13 @@ export function DashboardChart(props: Props) {
             data: data,
           },
         ],
+        tooltip: {
+          valueDecimals: 2,
+        },
         plotOptions: {
           series: {
+            lineWidth: 3,
+            showInLegend: false,
             marker: {
               enabled: false,
             },

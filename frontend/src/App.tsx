@@ -1,54 +1,49 @@
-import React, { useEffect, useState } from "react";
-import socketIOClient from "socket.io-client";
-import { DashboardNavBar } from "./components/DashboardNavBar";
-import { Col, Container, Row } from "react-bootstrap";
-import { DashboardChart } from "./components/DashboardChart";
+import React from "react";
 
-// const ENDPOINT = "http://localhost:8000";
-// const socket = socketIOClient(ENDPOINT);
+import { DashboardChart } from "./components/DashboardChart";
+import { Box, createTheme, Grid, ThemeProvider } from "@mui/material";
+import ButtonAppBar from "./components/ButtonAppBar";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 function App() {
-  // const [data, setData] = useState<number[]>([]);
-  //
-  // useEffect(() => {
-  //   socket.on("FromAPI", (recData) => {
-  //     setData((data) => [...data, typeof recData !== "undefined" && recData]);
-  //   });
-  // }, []);
-
   return (
     <div>
-      <DashboardNavBar></DashboardNavBar>
-      <Container fluid="md">
-        <Row>
-          <Col>
-            <DashboardChart
-              name="Umbrella Corporation Stocks"
-              socket="umbrella_stocks"
-            ></DashboardChart>
-          </Col>
-          <Col>
-            <DashboardChart
-              name="Gotham City Opera Stocks"
-              socket="gotham_city_opera_stocks"
-            ></DashboardChart>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <DashboardChart
-              name="InGen Stocks"
-              socket="ingen_stocks"
-            ></DashboardChart>
-          </Col>
-          <Col>
-            <DashboardChart
-              name="Cyberdyne Systems Stocks"
-              socket="cyberdyne_systems"
-            ></DashboardChart>
-          </Col>
-        </Row>
-      </Container>
+      <ThemeProvider theme={darkTheme}>
+        <ButtonAppBar></ButtonAppBar>
+        <Box sx={{ p: 3 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <DashboardChart
+                name="Umbrella Corporation Stocks"
+                socket="umbrella_stocks"
+              ></DashboardChart>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DashboardChart
+                name="Gotham City Opera Stocks"
+                socket="gotham_city_opera_stocks"
+              ></DashboardChart>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DashboardChart
+                name="InGen Stocks"
+                socket="ingen_stocks"
+              ></DashboardChart>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DashboardChart
+                name="Cyberdyne Systems Stocks"
+                socket="cyberdyne_systems"
+              ></DashboardChart>
+            </Grid>
+          </Grid>
+        </Box>
+      </ThemeProvider>
     </div>
   );
 }
