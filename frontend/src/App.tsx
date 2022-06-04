@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 
 import { DashboardCharts } from "./components/DashboardCharts";
 import DashboardAppBar from "./components/DashboardAppBar";
+import Box from "@mui/material/Box";
 
 const darkTheme = createTheme({
   palette: {
@@ -15,7 +16,9 @@ function App() {
     <div>
       <ThemeProvider theme={darkTheme}>
         <DashboardAppBar></DashboardAppBar>
-        <DashboardCharts></DashboardCharts>
+        <Box sx={{ p: 3 }}>
+          <DashboardCharts></DashboardCharts>
+        </Box>
       </ThemeProvider>
     </div>
   );
