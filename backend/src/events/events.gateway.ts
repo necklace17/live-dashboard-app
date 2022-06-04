@@ -1,16 +1,12 @@
 import {
-  ConnectedSocket,
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
-  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
-  WsResponse,
 } from '@nestjs/websockets';
 import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
-import { interval, map } from 'rxjs';
 
 @WebSocketGateway({ cors: true })
 export class EventsGateway
@@ -45,7 +41,11 @@ export class EventsGateway
     maxValue = 100,
   ) {
     setInterval(
-      () => this.server.emit(ev, this.getRandomArbitrary(minValue, maxValue)),
+      () =>
+        this.server.emit(ev, {
+          time: new Date().getTime(),
+          value: this.getRandomArbitrary(minValue, maxValue),
+        }),
       interval,
     );
   }

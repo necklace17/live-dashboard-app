@@ -10,16 +10,21 @@ type Props = {
   socket: string;
 };
 
+type ReceiveDataType = { time: number; value: number };
+
 export function DashboardChart(props: Props) {
-  const [data, setData] = useState<number[]>([]);
+  const [data, setData] = useState<[number, number][]>([]);
 
   useEffect(() => {
-    socket.on(props.socket, (recData) => {
+    socket.on(props.socket, (recData: ReceiveDataType) => {
       setData(function (data) {
-        if (data.length >= 1000) {
+        if (data.length >= 50) {
           data.shift();
         }
-        return [...data, typeof recData !== "undefined" && recData];
+        return [
+          ...data,
+          typeof recData.value !== "undefined" && [recData.time, recData.value],
+        ];
       });
     });
   }, []);
@@ -27,17 +32,14 @@ export function DashboardChart(props: Props) {
     <HighchartsReact
       highcharts={Highcharts}
       options={{
-        // chart: {
-        //   zoomType: "x",
-        //   borderColor: "#EBBA95",
-        //   borderRadius: 20,
-        //   borderWidth: 2,
-        // },
+        chart: {
+          zoomType: "x",
+        },
         title: {
           text: props.name,
         },
-        xAxis: { title: { text: "xAxis Title" } },
-        yAxis: { title: { text: "yAxis Title" } },
+        xAxis: { type: "datetime" },
+        yAxis: { title: { text: "Price" } },
         series: [
           {
             data: data,
