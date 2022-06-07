@@ -7,6 +7,8 @@ import {
 } from '@nestjs/websockets';
 import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
+import { DataDto } from '../general/dtos/data.dto';
+import { getRandomArbitrary } from '../general/general.functions';
 
 @WebSocketGateway({ cors: true })
 export class EventsGateway
@@ -15,9 +17,7 @@ export class EventsGateway
   private logger: Logger = new Logger('EventsGateway');
   @WebSocketServer()
   server: Server;
-  getRandomArbitrary(minValue, maxValue) {
-    return Math.random() * (maxValue - minValue) + minValue;
-  }
+
   handleConnection(client: Socket, ...args: any[]): any {
     this.logger.log(`Client connected: ${client.id}`);
   }
@@ -40,13 +40,12 @@ export class EventsGateway
     minValue = 1,
     maxValue = 100,
   ) {
-    setInterval(
-      () =>
-        this.server.emit(ev, {
-          time: new Date().getTime(),
-          value: this.getRandomArbitrary(minValue, maxValue),
-        }),
-      interval,
-    );
+    setInterval(() => {
+      const dataDto: DataDto = {
+        time: new Date().getTime(),
+        value: getRandomArbitrary(minValue, maxValue),
+      };
+      return this.server.emit(ev, dataDto);
+    }, interval);
   }
 }

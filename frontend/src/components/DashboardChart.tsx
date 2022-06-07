@@ -16,7 +16,13 @@ type ReceiveDataType = { time: number; value: number };
 export function DashboardChart(props: Props) {
   const [data, setData] = useState<[number, number][]>([]);
 
-  useEffect(() => {
+  function getData() {
+    fetch(`/history`)
+      .then((r) => r.json())
+      .then((recData) =>
+        setData(recData.map(({ time, value }, _) => [time, value]))
+      );
+
     socket.on(props.socket, (recData: ReceiveDataType) => {
       setData(function (data) {
         if (data.length >= 50) {
@@ -28,6 +34,10 @@ export function DashboardChart(props: Props) {
         ];
       });
     });
+  }
+
+  useEffect(() => {
+    getData();
   }, []);
   return (
     <Box

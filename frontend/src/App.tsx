@@ -68,7 +68,6 @@ Highcharts.theme = {
   },
   xAxis: {
     // Apply later when history endpoint is implemented
-    // range: 40
     labels: { style: { color: "#fff" } },
     title: { style: { color: "#fff" } },
   },
