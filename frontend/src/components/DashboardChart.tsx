@@ -30,39 +30,45 @@ export function DashboardChart(props: Props) {
     });
   }, []);
   return (
-    // <Box
-    // // sx={{ p: 1 }}
-    // >
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={{
-        chart: {
-          zoomType: "x",
-        },
-        title: {
-          text: props.name,
-        },
-        xAxis: { title: { text: "Time" }, type: "datetime" },
-        yAxis: { title: { text: "Price" } },
-        series: [
-          {
-            data: data,
+    <Box
+      sx={{
+        p: 1,
+        borderRadius: 4,
+        backgroundColor: "background.paper",
+        shadow: 2,
+      }}
+    >
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={{
+          chart: {
+            zoomType: "x",
           },
-        ],
-        tooltip: {
-          valueDecimals: 2,
-        },
-        plotOptions: {
-          series: {
-            lineWidth: 3,
-            showInLegend: false,
-            marker: {
-              enabled: false,
+          title: {
+            text: props.name,
+          },
+          xAxis: { title: { text: "Time" }, type: "datetime" },
+          yAxis: { title: { text: "Price" } },
+          series: [
+            {
+              data: data,
+              name: props.name,
+            },
+          ],
+          tooltip: {
+            valueDecimals: 2,
+          },
+          plotOptions: {
+            series: {
+              lineWidth: 3,
+              showInLegend: false,
+              marker: {
+                enabled: false,
+              },
             },
           },
-        },
-      }}
-    />
-    // </Box>
+        }}
+      />
+    </Box>
   );
 }

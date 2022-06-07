@@ -60,6 +60,8 @@ Highcharts.theme = {
     },
   },
   yAxis: {
+    min: 0,
+    max: 100,
     gridLineWidth: 0, //Remove xAxis lines
     labels: { style: { color: "#fff" } },
     title: { style: { color: "#fff" } },
