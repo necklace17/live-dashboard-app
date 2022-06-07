@@ -2,6 +2,7 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
+import Box from "@mui/material/Box";
 
 const ENDPOINT = "http://localhost:8000";
 const socket = socketIOClient(ENDPOINT);
@@ -29,6 +30,9 @@ export function DashboardChart(props: Props) {
     });
   }, []);
   return (
+    // <Box
+    // // sx={{ p: 1 }}
+    // >
     <HighchartsReact
       highcharts={Highcharts}
       options={{
@@ -38,7 +42,7 @@ export function DashboardChart(props: Props) {
         title: {
           text: props.name,
         },
-        xAxis: { type: "datetime" },
+        xAxis: { title: { text: "Time" }, type: "datetime" },
         yAxis: { title: { text: "Price" } },
         series: [
           {
@@ -59,5 +63,6 @@ export function DashboardChart(props: Props) {
         },
       }}
     />
+    // </Box>
   );
 }
