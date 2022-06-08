@@ -9,25 +9,22 @@ export function DashboardCharts() {
         <DashboardChart
           name="Umbrella Corporation Stocks"
           socket="umbrella_stocks"
-        ></DashboardChart>
+        />
       </Grid>
       <Grid item xs={12} md={6}>
         <DashboardChart
           name="Gotham City Opera Stocks"
           socket="gotham_city_opera_stocks"
-        ></DashboardChart>
+        />
       </Grid>
       <Grid item xs={12} md={6}>
-        <DashboardChart
-          name="InGen Stocks"
-          socket="ingen_stocks"
-        ></DashboardChart>
+        <DashboardChart name="InGen Stocks" socket="ingen_stocks" />
       </Grid>
       <Grid item xs={12} md={6}>
         <DashboardChart
           name="Cyberdyne Systems Stocks"
           socket="cyberdyne_systems"
-        ></DashboardChart>
+        />
       </Grid>
     </Grid>
   );

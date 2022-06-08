@@ -18,7 +18,7 @@ export class EventsGateway
   @WebSocketServer()
   server: Server;
 
-  handleConnection(client: Socket, ...args: any[]): any {
+  handleConnection(client: Socket, ..._args: any[]): any {
     this.logger.log(`Client connected: ${client.id}`);
   }
 
@@ -26,7 +26,7 @@ export class EventsGateway
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
-  afterInit(server: Server) {
+  afterInit(_server: Server) {
     this.logger.log('Initialize Gateway');
     this.emitMessages('umbrella_stocks', 1500, 1, 55);
     this.emitMessages('gotham_city_opera_stocks', 2000);

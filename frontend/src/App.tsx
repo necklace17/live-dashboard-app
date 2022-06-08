@@ -80,9 +80,9 @@ function App() {
     <div>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <DashboardAppBar></DashboardAppBar>
+        <DashboardAppBar />
         <Box sx={{ p: 3 }}>
-          <DashboardCharts></DashboardCharts>
+          <DashboardCharts />
         </Box>
       </ThemeProvider>
     </div>
